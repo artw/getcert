@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+mkdir -p out
+docker run -ti --rm -v $PWD/data:/data getcert $@
