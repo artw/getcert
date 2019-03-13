@@ -1,7 +1,7 @@
 # getcert
 
 A simple utility based on magnuswatn's _certsrv_ python library to generate a key and sign it using 
-Microsoft Certification Authority web service.
+Microsoft Certification Authority web service
 
 - generates a key
 - makes a CSR and signs it using the above key
@@ -12,7 +12,7 @@ Microsoft Certification Authority web service.
 
 Tested only with python 3.7
  
-##examples
+## examples
 To use local python
 ```bash
 # pip install certsrv pyOpenSSL requests_ntlm pyjks
@@ -23,7 +23,7 @@ To use local python
 To use docker
 ```bash
 # ./build.sh
-# ./gencert --help
+# ./getcert --help
 ```
 
 The `gencert` script  mounts `./data` as `/data`, so you can put your CA certificate file in `./data/root.cer`
