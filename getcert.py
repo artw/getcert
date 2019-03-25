@@ -37,6 +37,9 @@ def _cli():
     parser.add_argument("--cafile", type=str,
                         help="Trusted CA certificate for establishing SSL connection"
                         )
+    parser.add_argument("-t", "--template", type=str, default="WebServer",
+                        help="The name of the Certificate Template to use with the certificate request"
+                        )
     args = parser.parse_args()
     return args
 
@@ -61,7 +64,7 @@ def main():
     # Get the new cert from the MSCA server
     pem_req = OpenSSL.crypto.dump_certificate_request(OpenSSL.crypto.FILETYPE_PEM, req)
     ca_server = Certsrv(args.server, args.login, args.password, auth_method=args.method, cafile=args.cafile)
-    pem_cert = ca_server.get_cert(pem_req, "WebServer")
+    pem_cert = ca_server.get_cert(pem_req, args.template)
     pem_key = OpenSSL.crypto.dump_privatekey(OpenSSL.crypto.FILETYPE_PEM, key)
 
     # Get the latest CA certificate from MSCA
