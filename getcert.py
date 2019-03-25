@@ -32,7 +32,7 @@ def _cli():
                         help="Output format, pem - base64 text format, jks - java keystore (default pw = changeit) or both",
                         )
     parser.add_argument("--keystore-pass", type=str, default="changeit",
-                        help="Passphrase for new keystore"
+                        help="Passphrase for the new keystore"
                         )
     parser.add_argument("--cafile", type=str,
                         help="Trusted CA certificate for establishing SSL connection"
