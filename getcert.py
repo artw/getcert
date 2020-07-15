@@ -16,6 +16,9 @@ def _cli():
     parser.add_argument('fqdn', type=str, nargs='+',
                         help="Fully Qualified Domain Names to use for Common Name (and Alt Name(s)) for the certificate"
                         ),
+    parser.add_argument('--ip', type=str, nargs='*',
+                        help="IP Addresses to add as Subject Alternative Names"
+                        ),
     parser.add_argument("-s", "--server", type=str, required=True,
                         help="the hostname of the server hosting MS CA Web Service"
                         )
@@ -56,6 +59,9 @@ def main():
     if len(args.fqdn) > 1:
         for cn in args.fqdn[1:]:
             san += b", DNS: " + cn.encode()
+    if len(args.ip) > 0:
+        for ip in args.ip:
+            san += b", IP: " + ip.encode()
     san_extension = OpenSSL.crypto.X509Extension(b"subjectAltName", False, san)
     req.add_extensions([san_extension])
     req.set_pubkey(key)
